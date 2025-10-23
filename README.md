@@ -35,10 +35,10 @@
 
 ## Jeux d’essai
 ###### Exemple de prêts à ajouter pour tester :
-    Emprunteur	  Montant(€)	Taux annuel(%)	 Durée (mois)	  Date début
-    Alice	      2000	           2	            12	          2025-01-01
-    Bob	          5000	           5	            24	          2025-02-15
-    Charlie	      10000	           3.5	            36	          2025-03-10
+    Emprunteur	  Montant(€)	Taux annuel(%)	 Durée(mois)	  Date début      Mensualité(€)
+    Alice	      2000	           2	            12	          2025-01-01      166.20
+    Bob	          5000	           5	            24	          2025-02-15      219.36
+    Charlie	      10000	           3.5	            36	          2025-03-10      292.86
 
 ## Tester filtres :
 ###### Nom : “Alice” → seul le prêt d’Alice s’affiche.
