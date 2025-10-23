@@ -1,56 +1,79 @@
 ﻿using SimulationsPretsBancaires.Models;
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace SimulationsPretsBancaires.Services
 {
+    
+    // Service de calcul pour les prêts bancaires
+    // Implémente les formules financières standards d'amortissement
     internal static class CalculateurPret
     {
-        // Calcul de la mensualité M = P * (i / (1 - (1 + i)^-n)) avec i = tauxAnnuel/12
+        
+        // Calcule la mensualité d'un prêt selon la formule d'amortissement constant
+        // Formule : M = P × (i / (1 - (1 + i)^(-n)))
+        // montant = Capital emprunté en euros
+        // tauxAnnuel = Taux d'intérêt annuel en pourcentage
+        // dureeMois = Durée du prêt en mois
+        // Mensualité arrondie à 2 décimales
         public static double CalculerMensualite(double montant, double tauxAnnuel, int dureeMois)
         {
+            // Cas limite : durée nulle
             if (dureeMois <= 0) return 0;
+
+            // Cas spécial : taux zéro (division simple du capital)
             if (tauxAnnuel <= 0) return Math.Round(montant / dureeMois, 2);
 
-            double i = (tauxAnnuel / 100.0) / 12.0;
-            double mensualite = montant * (i / (1 - Math.Pow(1 + i, - dureeMois)));
+            // Conversion du taux annuel en taux mensuel
+            double tauxMensuel = (tauxAnnuel / 100.0) / 12.0;
+
+            // Application de la formule standard d'amortissement
+            double mensualite = montant * (tauxMensuel / (1 - Math.Pow(1 + tauxMensuel, -dureeMois)));
+
             return Math.Round(mensualite, 2);
         }
 
-
-        // Génère l'échéancier détaillé
+       
+        // Génère l'échéancier complet d'un prêt avec détail mensuel
+        // Chaque échéance contient : numéro, date, intérêts, principal, solde restant
         public static List<Echeance> GenererEcheancier(Prets pret)
         {
             var echeancier = new List<Echeance>();
-            double solde = pret.Montant;
-            double monthlyRate = (pret.TauxAnnuel / 100.0) / 12.0;
+            double soldeRestant = pret.Montant;
+
+            // Calcul du taux mensuel à partir du taux annuel
+            double tauxMensuel = (pret.TauxAnnuel / 100.0) / 12.0;
             double mensualite = CalculerMensualite(pret.Montant, pret.TauxAnnuel, pret.DureeMois);
 
-            for (int n = 1; n <= pret.DureeMois; n++)
+            // Génération de chaque échéance mensuelle
+            for (int numeroMois = 1; numeroMois <= pret.DureeMois; numeroMois++)
             {
-                double interet = Math.Round(solde * monthlyRate, 2);
-                double principalPart = Math.Round(mensualite - interet, 2);
+                // Calcul de la part d'intérêts du mois
+                double interetsMois = Math.Round(soldeRestant * tauxMensuel, 2);
 
-                // Ajustement à la dernière échéance pour éviter centimes négatifs
-                if (n == pret.DureeMois)
+                // Calcul de la part de capital remboursé
+                double capitalRembourse = Math.Round(mensualite - interetsMois, 2);
+
+                // Ajustement de la dernière échéance pour garantir un solde final à zéro
+                if (numeroMois == pret.DureeMois)
                 {
-                    principalPart = Math.Round(solde, 2);
-                    mensualite = Math.Round(interet + principalPart, 2);
+                    capitalRembourse = Math.Round(soldeRestant, 2);
+                    mensualite = Math.Round(interetsMois + capitalRembourse, 2);
                 }
 
-                solde = Math.Round(solde - principalPart, 2);
-                if (solde < 0) solde = 0;
+                // Mise à jour du solde restant dû
+                soldeRestant = Math.Round(soldeRestant - capitalRembourse, 2);
+                if (soldeRestant < 0) 
+                    soldeRestant = 0; // pas de solde négatif
 
+                // Création de l'échéance
                 echeancier.Add(new Echeance
                 {
-                    NumeroEcheance = n,
-                    DateEcheance = pret.DateDebut.AddMonths(n),
-                    Interets = interet,
-                    MontantPrincipal = principalPart,
-                    ResteDu = solde
+                    NumeroEcheance = numeroMois,
+                    DateEcheance = pret.DateDebut.AddMonths(numeroMois),
+                    Interets = interetsMois,
+                    MontantPrincipal = capitalRembourse,
+                    ResteDu = soldeRestant
                 });
             }
 

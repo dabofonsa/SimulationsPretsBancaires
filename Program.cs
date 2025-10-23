@@ -13,9 +13,12 @@ namespace SimulationsPretsBancaires
         [STAThread]
         static void Main()
         {
+            // Initialisation de l'application Windows Forms 
             Application.SetHighDpiMode(HighDpiMode.SystemAware);
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
+            
+            // Démarre sur le formulaire principal
             Application.Run(new Forms.FormulairePrincipal());
         }
     }

@@ -12,13 +12,20 @@ using System.Windows.Forms;
 
 namespace SimulationsPretsBancaires.Forms
 {
+    // Formulaire pour créer, modifier ou supprimer un prêt
     internal partial class FormulairePret : Form
     {
+        // Propriété représentant le prêt manipulé
         public Prets Prets { get; private set; }
-        public FormulairePret( Prets pret = null )
+
+        // Constructeur : initialise le formulaire et charge les valeurs du prêt s'il existe
+        public FormulairePret(Prets pret = null)
         {
             InitializeComponent();
 
+
+            // Si un prêt est passé en paramètre, créer une copie pour modification
+            // Sinon, créer un nouveau prêt avec la date du jour
             Prets = pret != null
                 ? new Prets
                 {
@@ -31,12 +38,19 @@ namespace SimulationsPretsBancaires.Forms
                 }
                 : new Prets { DateDebut = DateTime.Today };
 
+            //  Configuration de la fenêtre et Titre du formulaire selon l'action
             Text = pret == null ? "Ajouter un prêt" : "Modifier un prêt";
+            Width = 700;
+            Height = 600;
+            StartPosition = FormStartPosition.CenterScreen;
 
+            // Remplit les champs du formulaire avec les données du modèle
             ChargerDepuisModele();
+
+            // Calcule la mensualité au démarrage
             MettreAJourMensualite();
 
-            // Attachements d’événements (optionnel si tu ne les as pas faits via le Designer)
+            // Liaison des événements aux contrôles
             numMontant.ValueChanged += (s, e) => MettreAJourMensualite();
             numTauxAnnuel.ValueChanged += (s, e) => MettreAJourMensualite();
             numDuree.ValueChanged += (s, e) => MettreAJourMensualite();
@@ -44,7 +58,7 @@ namespace SimulationsPretsBancaires.Forms
             btnAnnuler.Click += (s, e) => DialogResult = DialogResult.Cancel;
         }
 
-        // C#
+        // Remplit les champs du formulaire à partir de l’objet Prets
         private void ChargerDepuisModele()
         {
             txtEmprunteur.Text = Prets.NomEmprunteur ?? string.Empty;
@@ -59,6 +73,8 @@ namespace SimulationsPretsBancaires.Forms
             dateDeDebut.Value = Prets.DateDebut == default ? DateTime.Today : Prets.DateDebut;
         }
 
+
+        // Calcule et affiche la mensualité selon les valeurs entrées
         private void MettreAJourMensualite()
         {
             double montant = (double)numMontant.Value;
@@ -68,6 +84,8 @@ namespace SimulationsPretsBancaires.Forms
             valeurMensualite.Text = mensualite.ToString("N2");
         }
 
+
+        // Vérifie la validité des données et ferme le formulaire si tout est correct
         private void ValiderEtFermer()
         {
             if (string.IsNullOrWhiteSpace(txtEmprunteur.Text))
@@ -84,7 +102,7 @@ namespace SimulationsPretsBancaires.Forms
 
             if (numDuree.Value < 1)
             {
-                MessageBox.Show("Durée doit être supérieur ou égal à 1.");
+                MessageBox.Show("Durée doit être supérieure ou égale à 1.");
                 return;
             }
 
@@ -94,25 +112,21 @@ namespace SimulationsPretsBancaires.Forms
                 return;
             }
 
+            // Mise à jour des propriétés du prêt avec les valeurs saisies
             Prets.NomEmprunteur = txtEmprunteur.Text.Trim();
             Prets.Montant = (double)numMontant.Value;
             Prets.TauxAnnuel = (double)numTauxAnnuel.Value;
             Prets.DureeMois = (int)numDuree.Value;
             Prets.DateDebut = dateDeDebut.Value.Date;
 
-            // ✅ Ajout de cette ligne pour stocker la mensualité dans l'objet
+            // Calcul et stockage de la mensualité dans le modèle
             Prets.Mensualite = CalculateurPret.CalculerMensualite(
                 Prets.Montant,
                 Prets.TauxAnnuel,
                 Prets.DureeMois
             );
 
-            Prets.NomEmprunteur = txtEmprunteur.Text.Trim();
-            Prets.Montant = (double)numMontant.Value;
-            Prets.TauxAnnuel = (double)numTauxAnnuel.Value;
-            Prets.DureeMois = (int)numDuree.Value;
-            Prets.DateDebut = dateDeDebut.Value.Date;
-
+            // Ferme le formulaire avec succès
             DialogResult = DialogResult.OK;
         }
     }
