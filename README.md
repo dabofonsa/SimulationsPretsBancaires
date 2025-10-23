@@ -12,7 +12,9 @@
 ###### (Bonus) Graphique du capital restant dû.
 ###### Sauvegarde et chargement persistants via JSON.
 
-## Lancer l’application
+## Lancement de l’application
+###### Cloner l'application dans un dossier de votre choix
+###### Dans ce dossier ouvre invite de commandes et taper: git clone https://github.com/dabofonsa/SimulationsPretsBancaires.git
 ###### Ouvrir le projet dans Visual Studio 2022+.
 ###### Compiler le projet (.NET 6+ recommandé).
 ###### Exécuter FormulairePrincipal comme formulaire de démarrage.
