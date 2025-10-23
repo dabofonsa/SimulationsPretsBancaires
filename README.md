@@ -1,6 +1,6 @@
 # SimulationsPretsBancaires
-### Application de bureau permettant de gérer des prêts, de calculer les mensualités et d’afficher l’échéancier complet.
-### Elle permet également de filtrer et trier les prêts, d’exporter les échéanciers en CSV et de visualiser (bonus) le capital restant dû sous forme de graphique.
+#### Application de bureau permettant de gérer des prêts, de calculer les mensualités et d’afficher l’échéancier complet.
+#### Elle permet également de filtrer et trier les prêts, d’exporter les échéanciers en CSV et de visualiser (bonus) le capital restant dû sous forme de graphique.
 
 ## Fonctionnalités
 ###### Ajouter, modifier et supprimer des prêts.
