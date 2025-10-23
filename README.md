@@ -15,14 +15,13 @@
 ## Lancer l’application
 ### Ouvrir le projet dans Visual Studio 2022+.
 ### Compiler le projet (.NET 6+ recommandé).
-
 ### Exécuter FormulairePrincipal comme formulaire de démarrage.
-
 ### Ajouter des prêts et tester les fonctionnalités depuis l’interface.
 
 ## Choix techniques
 ### Langage : C#
 ### .NET 6+ (WinForms)
+### Design des Interfaces faites avec la boites outils de Visual Studio 2022
 ### Persistance : JSON pour la simplicité (possibilité de passer à SQLite + EF Core).
 ### Interface graphique : WinForms, simple et intuitive.
 ### Filtres et tris : LINQ pour rechercher par emprunteur ou montant minimum.
@@ -36,10 +35,10 @@
 
 ## Jeux d’essai
 ### Exemple de prêts à ajouter pour tester :
-### Emprunteur	Montant (€)	Taux annuel (%)	Durée (mois)	Date début
-    Alice	      2000	        2	            12	          2025-01-01
-    Bob	        5000	        5	            24	          2025-02-15
-    Charlie	    10000	        3.5	          36	          2025-03-10
+    Emprunteur	  Montant(€)	Taux annuel(%)	 Durée (mois)	  Date début
+    Alice	      2000	           2	            12	          2025-01-01
+    Bob	          5000	           5	            24	          2025-02-15
+    Charlie	      10000	           3.5	            36	          2025-03-10
 
 ## Tester filtres :
 ### Nom : “Alice” → seul le prêt d’Alice s’affiche.
