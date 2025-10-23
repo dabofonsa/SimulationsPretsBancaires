@@ -19,23 +19,27 @@ namespace SimulationsPretsBancaires.Forms
 
         public FormulairePrincipal()
         {
+            InitializeComponent(); // Initialise tous les composants créés par le Designer
             service = new PersistancePretsJson();
+            ChargerDonnees();
+
             Text = "Gestion des Prêts Bancaires";
             Width = 800;
             Height = 600;
             StartPosition = FormStartPosition.CenterScreen;
 
-            InitializeComponent(); // Initialise tous les composants créés dans le design
-            ChargerDonnees();
-
             // Lier les événements aux méthodes
             btnAjouterPret.Click += (s, e) => AjouterPret();
             btnModifierPret.Click += (s, e) => ModifierPret();
             btnSupprimerPret.Click += (s, e) => SupprimerPret();
+       
             champRechercherEmprunteur.TextChanged += (s, e) => AppliquerFiltre();
             champMontantMinimumPret.ValueChanged += (s, e) => AppliquerFiltre();
 
-            }
+            btnAfficherEcheancier.Click += (s, e) => AfficherEcheancier();
+            btnExporterEcheancierCSV.Click += (s, e) => ExporterEcheancierCSV();
+
+        }
 
             private void ChargerDonnees()
             {
@@ -51,6 +55,32 @@ namespace SimulationsPretsBancaires.Forms
             sourceDonnees.DataSource = prets;
 
         }
+
+        private Prets ObtenirPretSelectionne()
+        {
+            if (tableauDesPrets.CurrentRow?.DataBoundItem is Prets pretSelectionne)
+            {
+                return pretSelectionne;
+            }
+            else
+            {
+                MessageBox.Show("Veuillez sélectionner un prêt.", "Aucun prêt sélectionné", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return null;
+            }
+        }
+
+
+        //private void AppliquerFiltre()
+        //{
+        //    var filtreEmprunteur = champRechercherEmprunteur.Text.ToLower();
+        //    var montantMinimum = champMontantMinimumPret.Value;
+        //    var pretsFiltres = service.RecupererTous().Where(pret =>
+        //        pret.NomEmprunteur.ToLower().Contains(filtreEmprunteur) &&
+        //        pret.Montant >= montantMinimum).ToList();
+        //    sourceDonnees.DataSource = pretsFiltres;
+        //    tableauDePrets.Refresh();
+
+        //}
 
 
         private void AppliquerFiltre()
@@ -80,35 +110,61 @@ namespace SimulationsPretsBancaires.Forms
 
         private void ModifierPret()
         {
-            if (tableauDesPrets.CurrentRow?.DataBoundItem is Prets pretSelectionne)
+            var pretSelectionne = ObtenirPretSelectionne();
+            if (pretSelectionne == null) return;
+
+            var formulairePret = new FormulairePret(pretSelectionne);
+            if (formulairePret.ShowDialog() == DialogResult.OK)
             {
-                var formulairePret = new FormulairePret(pretSelectionne);
-                if (formulairePret.ShowDialog() == DialogResult.OK)
-                {
-                    service.Modifier(formulairePret.Prets);
-                    ChargerDonnees();
-                }
-            }
-            else
-            {
-                MessageBox.Show("Veuillez sélectionner un prêt à modifier.", "Aucun prêt sélectionné", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                service.Modifier(formulairePret.Prets);
+                ChargerDonnees();
             }
         }
 
         private void SupprimerPret()
         {
-            if (tableauDesPrets.CurrentRow?.DataBoundItem is Prets pretSelectionne)
+            var pretSelectionne = ObtenirPretSelectionne();
+            if (pretSelectionne == null) return;
+
+            var confirmation = MessageBox.Show($"Êtes-vous sûr de vouloir supprimer le prêt de {pretSelectionne.NomEmprunteur} ?",
+                                               "Confirmer la suppression", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+            if (confirmation == DialogResult.Yes)
             {
-                var confirmation = MessageBox.Show($"Êtes-vous sûr de vouloir supprimer le prêt de {pretSelectionne.NomEmprunteur} ?", "Confirmer la suppression", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
-                if (confirmation == DialogResult.Yes)
-                {
-                    service.Supprimer(pretSelectionne.Id);
-                    ChargerDonnees();
-                }
+                service.Supprimer(pretSelectionne.Id);
+                ChargerDonnees();
             }
-            else
+        }
+
+        private void AfficherEcheancier()
+        {
+            var pretSelectionne = ObtenirPretSelectionne();
+            if (pretSelectionne == null) return;
+
+            // 🔹 Génère la liste des échéances à partir du prêt
+            var echeancier = pretSelectionne.GenererEcheancier();
+
+            // 🔹 Ouvre le formulaire avec les données
+            var formulaireEcheancier = new FormulaireEcheancier(echeancier, pretSelectionne);
+            formulaireEcheancier.ShowDialog();
+        }
+
+
+        private void ExporterEcheancierCSV()
+        {
+            var pretSelectionne = ObtenirPretSelectionne();
+            if (pretSelectionne == null) return;
+
+            using (var dialogueEnregistrement = new SaveFileDialog())
             {
-                MessageBox.Show("Veuillez sélectionner un prêt à supprimer.", "Aucun prêt sélectionné", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                dialogueEnregistrement.Filter = "Fichiers CSV (*.csv)|*.csv";
+                dialogueEnregistrement.FileName = $"Echeancier_{pretSelectionne.NomEmprunteur}.csv";
+                if (dialogueEnregistrement.ShowDialog() == DialogResult.OK)
+                {
+                    var cheminFichier = dialogueEnregistrement.FileName;
+                    var échéancier = pretSelectionne.GenererEcheancier();
+                    ExporterFichierCSV.ExporterEcheancier(échéancier, cheminFichier);
+                    MessageBox.Show("L'échéancier a été exporté avec succès.", "Exportation réussie", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                }
             }
         }
     }

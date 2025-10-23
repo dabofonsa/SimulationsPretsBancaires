@@ -33,6 +33,13 @@ namespace SimulationsPretsBancaires.Forms
         {
             components = new System.ComponentModel.Container();
             tableauDesPrets = new DataGridView();
+            Id = new DataGridViewTextBoxColumn();
+            NomEmprunteur = new DataGridViewTextBoxColumn();
+            Montant = new DataGridViewTextBoxColumn();
+            TauxAnnuel = new DataGridViewTextBoxColumn();
+            DureeMois = new DataGridViewTextBoxColumn();
+            DateDebut = new DataGridViewTextBoxColumn();
+            Mensualite = new DataGridViewTextBoxColumn();
             champRechercherEmprunteur = new TextBox();
             champMontantMinimumPret = new NumericUpDown();
             btnAjouterPret = new Button();
@@ -44,13 +51,6 @@ namespace SimulationsPretsBancaires.Forms
             label1 = new Label();
             label2 = new Label();
             label3 = new Label();
-            Id = new DataGridViewTextBoxColumn();
-            NomEmprunteur = new DataGridViewTextBoxColumn();
-            Montant = new DataGridViewTextBoxColumn();
-            TauxAnnuel = new DataGridViewTextBoxColumn();
-            DureeMois = new DataGridViewTextBoxColumn();
-            DateDebut = new DataGridViewTextBoxColumn();
-            Mensualite = new DataGridViewTextBoxColumn();
             ((System.ComponentModel.ISupportInitialize)tableauDesPrets).BeginInit();
             ((System.ComponentModel.ISupportInitialize)champMontantMinimumPret).BeginInit();
             ((System.ComponentModel.ISupportInitialize)sourceDonnees).BeginInit();
@@ -61,98 +61,11 @@ namespace SimulationsPretsBancaires.Forms
             tableauDesPrets.AllowUserToOrderColumns = true;
             tableauDesPrets.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             tableauDesPrets.Columns.AddRange(new DataGridViewColumn[] { Id, NomEmprunteur, Montant, TauxAnnuel, DureeMois, DateDebut, Mensualite });
-            tableauDesPrets.Location = new Point(12, 145);
+            tableauDesPrets.Location = new Point(70, 139);
             tableauDesPrets.Name = "tableauDesPrets";
             tableauDesPrets.RowHeadersWidth = 51;
-            tableauDesPrets.Size = new Size(944, 307);
+            tableauDesPrets.Size = new Size(1015, 388);
             tableauDesPrets.TabIndex = 0;
-            // 
-            // champRechercherEmprunteur
-            // 
-            champRechercherEmprunteur.Location = new Point(45, 96);
-            champRechercherEmprunteur.Name = "champRechercherEmprunteur";
-            champRechercherEmprunteur.PlaceholderText = "Entrez le nom du emprunteur";
-            champRechercherEmprunteur.Size = new Size(234, 27);
-            champRechercherEmprunteur.TabIndex = 1;
-            // 
-            // champMontantMinimumPret
-            // 
-            champMontantMinimumPret.Location = new Point(312, 96);
-            champMontantMinimumPret.Name = "champMontantMinimumPret";
-            champMontantMinimumPret.Size = new Size(147, 27);
-            champMontantMinimumPret.TabIndex = 3;
-            // 
-            // btnAjouterPret
-            // 
-            btnAjouterPret.Location = new Point(546, 94);
-            btnAjouterPret.Name = "btnAjouterPret";
-            btnAjouterPret.Size = new Size(116, 29);
-            btnAjouterPret.TabIndex = 4;
-            btnAjouterPret.Text = "Ajouter";
-            btnAjouterPret.UseVisualStyleBackColor = true;
-            // 
-            // btnModifierPret
-            // 
-            btnModifierPret.Location = new Point(690, 94);
-            btnModifierPret.Name = "btnModifierPret";
-            btnModifierPret.Size = new Size(94, 29);
-            btnModifierPret.TabIndex = 5;
-            btnModifierPret.Text = "Modifier";
-            btnModifierPret.UseVisualStyleBackColor = true;
-            // 
-            // btnSupprimerPret
-            // 
-            btnSupprimerPret.Location = new Point(817, 94);
-            btnSupprimerPret.Name = "btnSupprimerPret";
-            btnSupprimerPret.Size = new Size(94, 29);
-            btnSupprimerPret.TabIndex = 6;
-            btnSupprimerPret.Text = "Supprimer";
-            btnSupprimerPret.UseVisualStyleBackColor = true;
-            // 
-            // btnAfficherEcheancier
-            // 
-            btnAfficherEcheancier.Location = new Point(27, 530);
-            btnAfficherEcheancier.Name = "btnAfficherEcheancier";
-            btnAfficherEcheancier.Size = new Size(94, 29);
-            btnAfficherEcheancier.TabIndex = 7;
-            btnAfficherEcheancier.Text = "Echeancier";
-            btnAfficherEcheancier.UseVisualStyleBackColor = true;
-            // 
-            // btnExporterEcheancierCSV
-            // 
-            btnExporterEcheancierCSV.Location = new Point(194, 530);
-            btnExporterEcheancierCSV.Name = "btnExporterEcheancierCSV";
-            btnExporterEcheancierCSV.Size = new Size(127, 29);
-            btnExporterEcheancierCSV.TabIndex = 8;
-            btnExporterEcheancierCSV.Text = "Exporter CSV";
-            btnExporterEcheancierCSV.UseVisualStyleBackColor = true;
-            // 
-            // label1
-            // 
-            label1.AutoSize = true;
-            label1.Location = new Point(45, 67);
-            label1.Name = "label1";
-            label1.Size = new Size(131, 20);
-            label1.TabIndex = 9;
-            label1.Text = "Nom Empreuntuer";
-            // 
-            // label2
-            // 
-            label2.AutoSize = true;
-            label2.Location = new Point(312, 67);
-            label2.Name = "label2";
-            label2.Size = new Size(65, 20);
-            label2.TabIndex = 10;
-            label2.Text = "Montant";
-            // 
-            // label3
-            // 
-            label3.AutoSize = true;
-            label3.Location = new Point(45, 26);
-            label3.Name = "label3";
-            label3.Size = new Size(304, 20);
-            label3.TabIndex = 11;
-            label3.Text = "Rechercher par nom emprunteur ou montant";
             // 
             // Id
             // 
@@ -168,23 +81,23 @@ namespace SimulationsPretsBancaires.Forms
             NomEmprunteur.HeaderText = "Nom Emprunteur";
             NomEmprunteur.MinimumWidth = 6;
             NomEmprunteur.Name = "NomEmprunteur";
-            NomEmprunteur.Width = 125;
+            NomEmprunteur.Width = 130;
             // 
             // Montant
             // 
             Montant.DataPropertyName = "Montant";
-            Montant.HeaderText = "Montant";
+            Montant.HeaderText = "Montant Emprunté";
             Montant.MinimumWidth = 6;
             Montant.Name = "Montant";
-            Montant.Width = 125;
+            Montant.Width = 130;
             // 
             // TauxAnnuel
             // 
             TauxAnnuel.DataPropertyName = "TauxAnnuel";
-            TauxAnnuel.HeaderText = "Taux (%)";
+            TauxAnnuel.HeaderText = "Taux Annuel (%)";
             TauxAnnuel.MinimumWidth = 6;
             TauxAnnuel.Name = "TauxAnnuel";
-            TauxAnnuel.Width = 125;
+            TauxAnnuel.Width = 130;
             // 
             // DureeMois
             // 
@@ -192,7 +105,7 @@ namespace SimulationsPretsBancaires.Forms
             DureeMois.HeaderText = "Durée (Mois)";
             DureeMois.MinimumWidth = 6;
             DureeMois.Name = "DureeMois";
-            DureeMois.Width = 125;
+            DureeMois.Width = 130;
             // 
             // DateDebut
             // 
@@ -200,7 +113,7 @@ namespace SimulationsPretsBancaires.Forms
             DateDebut.HeaderText = "Date de début";
             DateDebut.MinimumWidth = 6;
             DateDebut.Name = "DateDebut";
-            DateDebut.Width = 125;
+            DateDebut.Width = 130;
             // 
             // Mensualite
             // 
@@ -208,13 +121,103 @@ namespace SimulationsPretsBancaires.Forms
             Mensualite.HeaderText = "Mensualité";
             Mensualite.MinimumWidth = 6;
             Mensualite.Name = "Mensualite";
-            Mensualite.Width = 125;
+            Mensualite.Width = 130;
+            // 
+            // champRechercherEmprunteur
+            // 
+            champRechercherEmprunteur.Location = new Point(103, 95);
+            champRechercherEmprunteur.Name = "champRechercherEmprunteur";
+            champRechercherEmprunteur.PlaceholderText = "Entrez le nom du emprunteur";
+            champRechercherEmprunteur.Size = new Size(234, 27);
+            champRechercherEmprunteur.TabIndex = 1;
+            // 
+            // champMontantMinimumPret
+            // 
+            champMontantMinimumPret.Location = new Point(370, 95);
+            champMontantMinimumPret.Name = "champMontantMinimumPret";
+            champMontantMinimumPret.Size = new Size(147, 27);
+            champMontantMinimumPret.TabIndex = 3;
+            champMontantMinimumPret.Maximum = new decimal(new int[] { 1000000000, 0, 0, 0 });
+            champMontantMinimumPret.Minimum = new decimal(new int[] { 0, 0, 0, 0 });
+            champMontantMinimumPret.Increment = new decimal(new int[] { 200, 0, 0, 0 });
+            // 
+            // btnAjouterPret
+            // 
+            btnAjouterPret.Location = new Point(604, 93);
+            btnAjouterPret.Name = "btnAjouterPret";
+            btnAjouterPret.Size = new Size(116, 29);
+            btnAjouterPret.TabIndex = 4;
+            btnAjouterPret.Text = "Ajouter";
+            btnAjouterPret.UseVisualStyleBackColor = true;
+            // 
+            // btnModifierPret
+            // 
+            btnModifierPret.Location = new Point(748, 93);
+            btnModifierPret.Name = "btnModifierPret";
+            btnModifierPret.Size = new Size(94, 29);
+            btnModifierPret.TabIndex = 5;
+            btnModifierPret.Text = "Modifier";
+            btnModifierPret.UseVisualStyleBackColor = true;
+            // 
+            // btnSupprimerPret
+            // 
+            btnSupprimerPret.Location = new Point(875, 93);
+            btnSupprimerPret.Name = "btnSupprimerPret";
+            btnSupprimerPret.Size = new Size(94, 29);
+            btnSupprimerPret.TabIndex = 6;
+            btnSupprimerPret.Text = "Supprimer";
+            btnSupprimerPret.UseVisualStyleBackColor = true;
+            // 
+            // btnAfficherEcheancier
+            // 
+            btnAfficherEcheancier.Location = new Point(70, 611);
+            btnAfficherEcheancier.Name = "btnAfficherEcheancier";
+            btnAfficherEcheancier.Size = new Size(210, 29);
+            btnAfficherEcheancier.TabIndex = 7;
+            btnAfficherEcheancier.Text = "Afficher L'Echéancier";
+            btnAfficherEcheancier.UseVisualStyleBackColor = true;
+            // 
+            // btnExporterEcheancierCSV
+            // 
+            btnExporterEcheancierCSV.Location = new Point(357, 611);
+            btnExporterEcheancierCSV.Name = "btnExporterEcheancierCSV";
+            btnExporterEcheancierCSV.Size = new Size(223, 29);
+            btnExporterEcheancierCSV.TabIndex = 8;
+            btnExporterEcheancierCSV.Text = "Exporter L'Echeancier en CSV";
+            btnExporterEcheancierCSV.UseVisualStyleBackColor = true;
+            // 
+            // label1
+            // 
+            label1.AutoSize = true;
+            label1.Location = new Point(103, 66);
+            label1.Name = "label1";
+            label1.Size = new Size(131, 20);
+            label1.TabIndex = 9;
+            label1.Text = "Nom Empreuntuer";
+            // 
+            // label2
+            // 
+            label2.AutoSize = true;
+            label2.Location = new Point(370, 66);
+            label2.Name = "label2";
+            label2.Size = new Size(65, 20);
+            label2.TabIndex = 10;
+            label2.Text = "Montant";
+            // 
+            // label3
+            // 
+            label3.AutoSize = true;
+            label3.Location = new Point(103, 25);
+            label3.Name = "label3";
+            label3.Size = new Size(304, 20);
+            label3.TabIndex = 11;
+            label3.Text = "Rechercher par nom emprunteur ou montant";
             // 
             // FormulairePrincipal
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(976, 584);
+            ClientSize = new Size(1269, 670);
             Controls.Add(label3);
             Controls.Add(label2);
             Controls.Add(label1);
@@ -227,7 +230,6 @@ namespace SimulationsPretsBancaires.Forms
             Controls.Add(champRechercherEmprunteur);
             Controls.Add(tableauDesPrets);
             Name = "FormulairePrincipal";
-            Text = "FormulaireEcheancier";
             ((System.ComponentModel.ISupportInitialize)tableauDesPrets).EndInit();
             ((System.ComponentModel.ISupportInitialize)champMontantMinimumPret).EndInit();
             ((System.ComponentModel.ISupportInitialize)sourceDonnees).EndInit();
