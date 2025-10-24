@@ -75,6 +75,7 @@ namespace SimulationsPretsBancaires.Forms
             AppliquerFiltre();
         }
 
+
         // Récupère le prêt actuellement sélectionné dans le tableau
         // Affiche un message si aucune ligne n'est sélectionnée
         private Prets ObtenirPretSelectionne()
@@ -92,37 +93,43 @@ namespace SimulationsPretsBancaires.Forms
             }
         }
 
+
         // Applique les filtres de recherche avec LINQ (US5)
         // Filtre par nom d'emprunteur OU par montant minimum (exclusif)
         private void AppliquerFiltre()
         {
-            var liste = service.RecupererTous();
+            // Récupère la liste actuelle des prêts déjà chargée dans le BindingSource
+            var liste = ((List<Prets>)sourceDonnees.DataSource).ToList();
 
+            // Récupère les valeurs saisies par l'utilisateur pour filtrer
             string recherche = champRechercherEmprunteur.Text?.Trim() ?? string.Empty;
             double montantMin = (double)champMontantMinimumPret.Value;
 
-            // Début avec l'ensemble complet des prêts
+            // Commence avec l'ensemble complet des prêts
             IEnumerable<Prets> filtre = liste;
 
-            // Filtre par nom d'emprunteur (recherche insensible à la casse)
+            // Si l'utilisateur a saisi un nom d'emprunteur
             if (!string.IsNullOrWhiteSpace(recherche))
             {
+                // Filtre les prêts dont le nom contient la chaîne recherchée (insensible à la casse)
                 filtre = filtre.Where(p => (p.NomEmprunteur ?? string.Empty)
                     .IndexOf(recherche, StringComparison.OrdinalIgnoreCase) >= 0);
             }
-            // Filtre par montant minimum (si pas de recherche par nom)
+            // Sinon, si un montant minimum est renseigné
             else if (montantMin > 0)
             {
+                // Filtre les prêts dont le montant est supérieur ou égal au montant minimum
                 filtre = filtre.Where(p => p.Montant >= montantMin);
             }
 
-            // Tri alphabétique par nom d'emprunteur pour améliorer la lisibilité
+            // Tri les résultats par nom d'emprunteur pour une meilleure lisibilité
             filtre = filtre.OrderBy(p => p.NomEmprunteur);
 
-            // Mise à jour de l'affichage
+            // Met à jour la source du tableaDesPrets avec la liste filtrée
             sourceDonnees.DataSource = filtre.ToList();
-            tableauDesPrets.Refresh();
+            tableauDesPrets.Refresh(); // Rafraîchit l'affichage
         }
+
 
 
         // Gère l'exclusivité des champs de recherche
@@ -170,6 +177,7 @@ namespace SimulationsPretsBancaires.Forms
             }
         }
 
+
         // Réinitialise tous les filtres et recharge l'intégralité des données dans le tableau
         private void RafraichirTableau()
         {
@@ -185,6 +193,7 @@ namespace SimulationsPretsBancaires.Forms
             champMontantMinimumPret.Enabled = true;
         }
 
+
         // Ouvre le formulaire d'ajout d'un nouveau prêt 
         // Sauvegarde le prêt si l'utilisateur confirme
         private void AjouterPret()
@@ -196,6 +205,7 @@ namespace SimulationsPretsBancaires.Forms
                 ChargerDonnees();
             }
         }
+
 
         // Ouvre le formulaire de modification du prêt sélectionné
         // Met à jour les données si l'utilisateur confirme
@@ -211,6 +221,7 @@ namespace SimulationsPretsBancaires.Forms
                 ChargerDonnees();
             }
         }
+
 
         // Supprime le prêt sélectionné après confirmation
         private void SupprimerPret()
@@ -233,6 +244,7 @@ namespace SimulationsPretsBancaires.Forms
             }
         }
 
+
         // Génère et affiche l'échéancier détaillé du prêt sélectionné 
         private void AfficherEcheancier()
         {
@@ -247,6 +259,7 @@ namespace SimulationsPretsBancaires.Forms
             var formulaireEcheancier = new FormulaireEcheancier(echeancier, pretSelectionne);
             formulaireEcheancier.ShowDialog();
         }
+
 
         // Exporte l'échéancier du prêt sélectionné au format CSV
         private void ExporterEcheancierCSV()
