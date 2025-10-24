@@ -1,6 +1,6 @@
 # SimulationsPretsBancaires
-### Application de bureau permettant de gérer des prêts, de calculer les mensualités et d’afficher l’échéancier complet.
-### Elle permet également de filtrer et trier les prêts, d’exporter les échéanciers en CSV et de visualiser (bonus) le capital restant dû sous forme de graphique.
+#### Application de bureau permettant de gérer des prêts, de calculer les mensualités et d’afficher l’échéancier complet.
+#### Elle permet également de filtrer et trier les prêts, d’exporter les échéanciers en CSV et de visualiser (bonus) le capital restant dû sous forme de graphique.
 
 ## Fonctionnalités
 ###### Ajouter, modifier et supprimer des prêts.
@@ -12,7 +12,9 @@
 ###### (Bonus) Graphique du capital restant dû.
 ###### Sauvegarde et chargement persistants via JSON.
 
-## Lancer l’application
+## Lancement de l’application
+###### Cloner l'application dans un dossier de votre choix
+###### Dans ce dossier ouvre invite de commandes et taper: git clone https://github.com/dabofonsa/SimulationsPretsBancaires.git
 ###### Ouvrir le projet dans Visual Studio 2022+.
 ###### Compiler le projet (.NET 6+ recommandé).
 ###### Exécuter FormulairePrincipal comme formulaire de démarrage.
@@ -35,10 +37,10 @@
 
 ## Jeux d’essai
 ###### Exemple de prêts à ajouter pour tester :
-    Emprunteur	  Montant(€)	Taux annuel(%)	 Durée (mois)	  Date début
-    Alice	      2000	           2	            12	          2025-01-01
-    Bob	          5000	           5	            24	          2025-02-15
-    Charlie	      10000	           3.5	            36	          2025-03-10
+    Emprunteur	  Montant(€)	Taux annuel(%)	 Durée(mois)	  Date début      Mensualité(€)
+    Alice	      2000	           2	            12	          2025-01-01      166.20
+    Bob	          5000	           5	            24	          2025-02-15      219.36
+    Charlie	      10000	           3.5	            36	          2025-03-10      292.86
 
 ## Tester filtres :
 ###### Nom : “Alice” → seul le prêt d’Alice s’affiche.
