@@ -27,7 +27,7 @@
 ###### Langage : C#
 ###### .NET 6+ (WinForms)
 ###### Design des Interfaces faites avec la boites outils de Visual Studio 2022
-###### Persistance : JSON pour la simplicité (possibilité de passer à SQLite + EF Core).
+###### Persistance : JSON pour la simplicité.
 ###### Interface graphique : WinForms, simple et intuitive.
 ###### Filtres et tris : LINQ pour rechercher par emprunteur ou montant minimum.
 ###### Export CSV : UTF-8 avec séparateur ;.
