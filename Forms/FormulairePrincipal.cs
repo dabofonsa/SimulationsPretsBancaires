@@ -29,8 +29,8 @@ namespace SimulationsPretsBancaires.Forms
             ChargerDonnees();
 
             // Configuration de la fenêtre et Titre
-            Text = "Gestion des Prêts Bancaires";
-            Width = 1150;
+            Text = "Simulations des Prêts Bancaires";
+            Width = 110;
             Height = 850;
             StartPosition = FormStartPosition.CenterScreen;
 
@@ -53,6 +53,9 @@ namespace SimulationsPretsBancaires.Forms
 
             // Gere de l'état des champs de recherche
             MettreAJourEtatChampsRecherche();
+
+            // Mettre la fenêtre en plein écran
+            WindowState = FormWindowState.Maximized;
         }
 
         // Charge tous les prêts depuis la persistance et les affiche dans le tableau

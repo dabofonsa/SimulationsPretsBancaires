@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FormulairePret));
             labelEmprunteur = new Label();
             labelMontant = new Label();
             labelTauxAnnuel = new Label();
@@ -49,135 +50,91 @@
             // 
             // labelEmprunteur
             // 
-            labelEmprunteur.AutoSize = true;
-            labelEmprunteur.Location = new Point(80, 39);
+            resources.ApplyResources(labelEmprunteur, "labelEmprunteur");
             labelEmprunteur.Name = "labelEmprunteur";
-            labelEmprunteur.Size = new Size(123, 20);
-            labelEmprunteur.TabIndex = 0;
-            labelEmprunteur.Text = "Nom Emprunteur";
             // 
             // labelMontant
             // 
-            labelMontant.AutoSize = true;
+            resources.ApplyResources(labelMontant, "labelMontant");
             labelMontant.LiveSetting = System.Windows.Forms.Automation.AutomationLiveSetting.Polite;
-            labelMontant.Location = new Point(80, 94);
             labelMontant.Name = "labelMontant";
-            labelMontant.Size = new Size(65, 20);
-            labelMontant.TabIndex = 1;
-            labelMontant.Text = "Montant (€)";
             // 
             // labelTauxAnnuel
             // 
-            labelTauxAnnuel.AutoSize = true;
-            labelTauxAnnuel.Location = new Point(80, 149);
+            resources.ApplyResources(labelTauxAnnuel, "labelTauxAnnuel");
             labelTauxAnnuel.Name = "labelTauxAnnuel";
-            labelTauxAnnuel.Size = new Size(88, 20);
-            labelTauxAnnuel.TabIndex = 2;
-            labelTauxAnnuel.Text = "Taux Annuel (%)";
             // 
             // labelDuree
             // 
-            labelDuree.AutoSize = true;
-            labelDuree.Location = new Point(80, 204);
+            resources.ApplyResources(labelDuree, "labelDuree");
             labelDuree.Name = "labelDuree";
-            labelDuree.Size = new Size(95, 20);
-            labelDuree.TabIndex = 3;
-            labelDuree.Text = "Durée (mois)";
             // 
             // labelDateDebut
             // 
-            labelDateDebut.AutoSize = true;
-            labelDateDebut.Location = new Point(80, 262);
+            resources.ApplyResources(labelDateDebut, "labelDateDebut");
             labelDateDebut.Name = "labelDateDebut";
-            labelDateDebut.Size = new Size(62, 20);
-            labelDateDebut.TabIndex = 4;
-            labelDateDebut.Text = "Date de";
             // 
             // txtEmprunteur
             // 
-            txtEmprunteur.Location = new Point(243, 36);
+            resources.ApplyResources(txtEmprunteur, "txtEmprunteur");
             txtEmprunteur.Name = "txtEmprunteur";
-            txtEmprunteur.Size = new Size(321, 27);
-            txtEmprunteur.TabIndex = 6;
             // 
             // numMontant
             // 
+            resources.ApplyResources(numMontant, "numMontant");
             numMontant.DecimalPlaces = 2;
             numMontant.Increment = new decimal(new int[] { 100, 0, 0, 0 });
-            numMontant.Location = new Point(243, 87);
             numMontant.Maximum = new decimal(new int[] { 1000000000, 0, 0, 0 });
             numMontant.Minimum = new decimal(new int[] { 10, 0, 0, 0 });
             numMontant.Name = "numMontant";
-            numMontant.Size = new Size(150, 27);
-            numMontant.TabIndex = 7;
+            numMontant.Value = new decimal(new int[] { 10, 0, 0, 0 });
             // 
             // numTauxAnnuel
-            //            
+            // 
+            resources.ApplyResources(numTauxAnnuel, "numTauxAnnuel");
             numTauxAnnuel.DecimalPlaces = 2;
-            numTauxAnnuel.Increment = new decimal(new int[] { 1, 0, 0, 0 });
-            numTauxAnnuel.Location = new Point(243, 142);
             numTauxAnnuel.Maximum = new decimal(new int[] { 1000000000, 0, 0, 0 });
-            numTauxAnnuel.Minimum = new decimal(new int[] { 0, 0, 0, 0 });
             numTauxAnnuel.Name = "numTauxAnnuel";
-            numTauxAnnuel.Size = new Size(150, 27);
-            numTauxAnnuel.TabIndex = 8;
             // 
             // numDuree
             // 
-            numDuree.Location = new Point(243, 197);
+            resources.ApplyResources(numDuree, "numDuree");
             numDuree.Maximum = new decimal(new int[] { 100000, 0, 0, 0 });
             numDuree.Minimum = new decimal(new int[] { 1, 0, 0, 0 });
             numDuree.Name = "numDuree";
-            numDuree.Size = new Size(150, 27);
-            numDuree.TabIndex = 9;
+            numDuree.Value = new decimal(new int[] { 1, 0, 0, 0 });
             // 
             // dateDeDebut
             // 
-            dateDeDebut.Location = new Point(243, 257);
+            resources.ApplyResources(dateDeDebut, "dateDeDebut");
             dateDeDebut.Name = "dateDeDebut";
-            dateDeDebut.Size = new Size(264, 27);
-            dateDeDebut.TabIndex = 10;
             // 
             // btnValider
             // 
-            btnValider.Location = new Point(169, 375);
+            resources.ApplyResources(btnValider, "btnValider");
             btnValider.Name = "btnValider";
-            btnValider.Size = new Size(94, 29);
-            btnValider.TabIndex = 12;
-            btnValider.Text = "Valider";
             btnValider.UseVisualStyleBackColor = true;
             // 
             // btnAnnuler
             // 
-            btnAnnuler.Location = new Point(349, 375);
+            resources.ApplyResources(btnAnnuler, "btnAnnuler");
             btnAnnuler.Name = "btnAnnuler";
-            btnAnnuler.Size = new Size(94, 29);
-            btnAnnuler.TabIndex = 13;
-            btnAnnuler.Text = "Annuler";
             btnAnnuler.UseVisualStyleBackColor = true;
             // 
             // labelMensualite
             // 
-            labelMensualite.AutoSize = true;
-            labelMensualite.Location = new Point(80, 315);
+            resources.ApplyResources(labelMensualite, "labelMensualite");
             labelMensualite.Name = "labelMensualite";
-            labelMensualite.Size = new Size(81, 20);
-            labelMensualite.TabIndex = 14;
-            labelMensualite.Text = "Mensualité (€)";
             // 
             // valeurMensualite
             // 
-            valeurMensualite.Location = new Point(243, 308);
+            resources.ApplyResources(valeurMensualite, "valeurMensualite");
             valeurMensualite.Name = "valeurMensualite";
-            valeurMensualite.Size = new Size(150, 27);
-            valeurMensualite.TabIndex = 15;
-            valeurMensualite.TextAlign = HorizontalAlignment.Center;
             // 
             // FormulairePret
             // 
-            AutoScaleDimensions = new SizeF(8F, 20F);
+            resources.ApplyResources(this, "$this");
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(626, 450);
             Controls.Add(valeurMensualite);
             Controls.Add(labelMensualite);
             Controls.Add(btnAnnuler);
@@ -193,7 +150,6 @@
             Controls.Add(labelMontant);
             Controls.Add(labelEmprunteur);
             Name = "FormulairePret";
-            Text = "FormulairePret";
             ((System.ComponentModel.ISupportInitialize)numMontant).EndInit();
             ((System.ComponentModel.ISupportInitialize)numTauxAnnuel).EndInit();
             ((System.ComponentModel.ISupportInitialize)numDuree).EndInit();

@@ -3,6 +3,7 @@ using SimulationsPretsBancaires.Services;
 using System;
 using System.Collections.Generic;
 using System.Windows.Forms;
+using System.Windows.Forms.DataVisualization.Charting;
 
 namespace SimulationsPretsBancaires.Forms
 {
@@ -28,7 +29,7 @@ namespace SimulationsPretsBancaires.Forms
             pret = pretSelectionne;
 
             //  Configuration de la fenêtre et Titre 
-            Text = $"Échéancier de l'Emprunteur {pret.NomEmprunteur}";
+            Text = $"Échéancier et courbe d'évolurion du capital restant dû de l'Emprunteur: {pret.NomEmprunteur}";
             Width = 1350;
             Height = 750;
             StartPosition = FormStartPosition.CenterScreen;
@@ -43,7 +44,10 @@ namespace SimulationsPretsBancaires.Forms
             btnFermerCSV.Click += (s, e) => Close();
 
             ChargerEcheancier();
-            //DessinerGraphique(); // Option pour graphique futur
+            DessinerGraphique();
+
+            // Mettre la fenêtre en plein écran
+            WindowState = FormWindowState.Maximized;
         }
 
         // Charge les données dans le DataGridView ( tableauDEcheancier )
@@ -52,6 +56,7 @@ namespace SimulationsPretsBancaires.Forms
             // Réinitialise la source de données pour forcer le rafraîchissement
             tableauDEcheancier.DataSource = null;
             tableauDEcheancier.DataSource = echeancier;
+
         }
 
         // Méthode pour exporter l'échéancier en CSV
@@ -84,33 +89,45 @@ namespace SimulationsPretsBancaires.Forms
             }
         }
 
-        // Méthode optionnelle pour dessiner un graphique (non utilisée)
-        //private void DessinerGraphique()
-        //{
-        //    graphique.Series.Clear();
-        //
-        //    var serie = new Series("Capital restant dû")
-        //    {
-        //        ChartType = SeriesChartType.Line,
-        //        XValueType = ChartValueType.Int32,
-        //        YValueType = ChartValueType.Double,
-        //        BorderWidth = 2
-        //    };
-        //
-        //    foreach (var e in echeancier)
-        //    {
-        //        serie.Points.AddXY(e.Numero, e.ResteDu);
-        //    }
-        //
-        //    graphique.Series.Add(serie);
-        //
-        //    if (graphique.ChartAreas.Count == 0)
-        //        graphique.ChartAreas.Add(new ChartArea("Principale"));
-        //
-        //    var zone = graphique.ChartAreas[0];
-        //    zone.AxisX.Title = "Échéance (mois)";
-        //    zone.AxisY.Title = "Capital restant dû (€)";
-        //    zone.AxisX.Interval = 1;
-        //}
+        //Méthode optionnelle pour dessiner un graphique(non utilisée)
+
+        private void DessinerGraphique()
+        {
+            // Vérifie que la liste de l’échéancier n’est pas vide
+            if (echeancier == null || echeancier.Count == 0)
+                return;
+
+            // Nettoyer le graphique avant de le redessiner
+            courbeCapitalRestant.Series.Clear();
+
+            // Créer une nouvelle série pour le graphique
+            var serie = new Series("Capital restant dû")
+            {
+                ChartType = SeriesChartType.Line,
+                BorderWidth = 2,
+                Color = System.Drawing.Color.RoyalBlue
+            };
+
+            // Ajouter les points (échéance -> capital restant dû)
+            foreach (var e in echeancier)
+            {
+                serie.Points.AddXY(e.NumeroEcheance, e.ResteDu);
+            }
+
+            // Ajouter la série au graphique
+            courbeCapitalRestant.Series.Add(serie);
+
+            // Configuration des axes
+            var zone = courbeCapitalRestant.ChartAreas[0];
+            zone.AxisX.Title = "Numéro d’échéance (mois)";
+            zone.AxisY.Title = "Capital restant dû (€)";
+            zone.AxisX.MajorGrid.LineColor = System.Drawing.Color.LightGray;
+            zone.AxisY.MajorGrid.LineColor = System.Drawing.Color.LightGray;
+
+            // Ajouter un titre clair
+            courbeCapitalRestant.Titles.Clear();
+            courbeCapitalRestant.Titles.Add("Évolution du capital restant dû");
+        }       
+
     }
 }
