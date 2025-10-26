@@ -11,7 +11,7 @@
 ###### Affichage automatique après la génération de l’échéancier montrant l’évolution décroissante du capital restant dû.
 ###### L’utilisateur peut visualiser la progression du remboursement au fil des mois et la est synchronisé avec le tableau.
 ###### Export CSV de l’échéancier.
-###### (Bonus) Graphique du capital restant dû.
+###### Graphique du capital restant dû.
 ###### Sauvegarde et chargement persistant via JSON.
 
 ## Lancement de l’application
@@ -39,13 +39,30 @@
 ###### Pas de gestion multi-utilisateurs ni sécurité.
 
 ## Jeux d’essai
-###### Exemple de prêts à ajouter pour tester :
-    Emprunteur	  Montant(€)	Taux annuel(%)	 Durée(mois)	  Date début      Mensualité(€)
-    Alice	      2000	           2	            12	          2025-01-01      166.20
-    Bob	          5000	           5	            24	          2025-02-15      219.36
-    Charlie	      10000	           3.5	            36	          2025-03-10      292.86
+###### Exemple de prêts à ajouter pour tester :     
+        | Emprunteur | Montant(€) | Taux annuel(%) | Durée(mois) | Date début   | Mensualité(€) |
+        | ---------- | ---------- | -------------- | ------------| ------------ | --------------|
+        |  Alice     |  2000      |    2           |   12        |  9736.31      |   166.20     |
+        |  Nicolas   |  5000      |    5           |   24        |  9471.82      |   219.36     |
+        |  Claude    |  10000     |    3.5         |   36        |  9206.59      |   292.86     |
+    
+###### Exemple du tableau d'écheance=ier de ALICE
+        | N° Échéance | Date Échéance | Intérêts (€) | Principal (€) | Reste Dû (€) |           
+        | ----------- | ------------- | ------------ | ------------- | ------------ |   
+        | 1           | 2025-02-01    | 3.33         | 162.87        | 1837.13      |
+        | 2           | 2025-03-01    | 3.06         | 163.14        | 1673.99      |
+        | 3           | 2025-04-01    | 2.79         | 163.41        | 1510.58      |
+        | 4           | 2025-05-01    | 2.52         | 163.68        | 1346.90      |
+        | 5           | 2025-06-01    | 2.25         | 163.95        | 1182.95      |
+        | 6           | 2025-07-01    | 1.97         | 164.23        | 1018.72      |
+        | 7           | 2025-08-01    | 1.70         | 164.50        | 854.22       |
+        | 8           | 2025-09-01    | 1.43         | 164.77        | 689.45       |
+        | 9           | 2025-10-01    | 1.15         | 165.05        | 524.40       |
+        | 10          | 2025-11-01    | 0.87         | 165.33        | 359.07       |
+        | 11          | 2025-12-01    | 0.60         | 165.60        | 193.47       |
+        | 12          | 2026-01-01    | 0.32         | 165.88        | 0.00         |
 
-## Tester filtres
+## Tester filtres par "Nom Emprunteur" ou par "Montant Minimum Prêt"
 ###### Nom : "Alice"  seul le prêt d’Alice s’affiche.
 ###### Montant minimum : 4000  seuls Bob et Charlie s’affichent.
 ###### Générer l’échéancier et exporter en CSV pour vérifier les calculs.
