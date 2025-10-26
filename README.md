@@ -8,9 +8,11 @@
 ###### Affichage d’un tableau des prêts avec : emprunteur, montant, taux, durée, date, mensualité.
 ###### Filtrage par nom d’emprunteur et montant minimum.
 ###### Génération d’un échéancier détaillé (numéro, date, intérêts, principal, reste dû).
+###### Affichage automatique après la génération de l’échéancier montrant l’évolution décroissante du capital restant dû.
+###### L’utilisateur peut visualiser la progression du remboursement au fil des mois et la est synchronisé avec le tableau.
 ###### Export CSV de l’échéancier.
 ###### (Bonus) Graphique du capital restant dû.
-###### Sauvegarde et chargement persistants via JSON.
+###### Sauvegarde et chargement persistant via JSON.
 
 ## Lancement de l’application
 ###### Cloner l'application dans un dossier de votre choix
@@ -18,6 +20,7 @@
 ###### Ouvrir le projet dans Visual Studio 2022+.
 ###### Compiler le projet (.NET 6+ recommandé).
 ###### Exécuter FormulairePrincipal comme formulaire de démarrage.
+###### Vous pouvez aussi lancer l'exécutable "SimulationsPretsBancaires.exe" qui se trouve aussi dans le chemin :  /SimulationsPretsBancaires/bin/Debug/net8.0-windows/SimulationsPretsBancaires.exe
 ###### Ajouter des prêts et tester les fonctionnalités depuis l’interface.
 
 ## Choix techniques
@@ -26,7 +29,7 @@
 ###### Design des Interfaces faites avec la boites outils de Visual Studio 2022
 ###### Persistance : JSON pour la simplicité (possibilité de passer à SQLite + EF Core).
 ###### Interface graphique : WinForms, simple et intuitive.
-######Filtres et tris : LINQ pour rechercher par emprunteur ou montant minimum.
+###### Filtres et tris : LINQ pour rechercher par emprunteur ou montant minimum.
 ###### Export CSV : UTF-8 avec séparateur ;.
 ###### Calcul mensualité : Formule classique d’un prêt amortissable.
 
@@ -42,15 +45,15 @@
     Bob	          5000	           5	            24	          2025-02-15      219.36
     Charlie	      10000	           3.5	            36	          2025-03-10      292.86
 
-## Tester filtres :
-###### Nom : “Alice” → seul le prêt d’Alice s’affiche.
-###### Montant minimum : 4000 → seuls Bob et Charlie s’affichent.
+## Tester filtres
+###### Nom : "Alice"  seul le prêt d’Alice s’affiche.
+###### Montant minimum : 4000  seuls Bob et Charlie s’affichent.
 ###### Générer l’échéancier et exporter en CSV pour vérifier les calculs.
 
 ## Structure du projet
-###### /Forms          -> Interfaces WinForms
-###### /Models         -> Classes Prets et Echeance
-###### /Services       -> Persistance, calculs, export CSV
-###### Program.cs      -> Point d’entrée
-###### README.md       -> Documentation
-###### prets.json      -> Données persistantes
+###### /Forms         ----> Interfaces WinForms
+###### /Models        ----> Classes Prets et Echeance
+###### /Services      ----> Persistance, calculs, export CSV
+###### Program.cs     ----> Point d’entrée
+###### README.md      ----> Documentation
+###### prets.json     ----> Données persistantes
