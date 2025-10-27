@@ -64,7 +64,7 @@
 
 ## Tester filtres par "Nom Emprunteur" ou par "Montant Minimum Prêt"
 ###### Nom : "Alice"  seul le prêt d’Alice s’affiche.
-###### Montant minimum : 4000  seuls Bob et Charlie s’affichent.
+###### Montant minimum : 4000  seuls Nicolas et Claude s’affichent.
 ###### Générer l’échéancier et exporter en CSV pour vérifier les calculs.
 
 ## Structure du projet
