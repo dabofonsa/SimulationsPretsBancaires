@@ -42,9 +42,9 @@
 ###### Exemple de prêts à ajouter pour tester :     
         | Emprunteur | Montant(€) | Taux annuel(%) | Durée(mois) | Date début   | Mensualité(€) |
         | ---------- | ---------- | -------------- | ------------| ------------ | --------------|
-        |  Alice     |  2000      |    2           |   12        |  9736.31     |   166.20      |
-        |  Nicolas   |  5000      |    5           |   24        |  9471.82     |   219.36      |
-        |  Claude    |  10000     |    3.5         |   36        |  9206.59     |   292.86      |
+        |  Alice     |  2000      |    2           |   12        |  01-01-2025  |   166.20      |
+        |  Nicolas   |  5000      |    5           |   24        |  15-02-2025  |   219.36      |
+        |  Claude    |  10000     |    3.5         |   36        |  10-03-2025  |   292.86      |
     
 ###### Exemple du tableau d'écheanceier de ALICE
         | N° Échéance | Date Échéance | Intérêts (€) | Principal (€) | Reste Dû (€) |           
